@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import cvPdf from '../assets/Maulana Hafizh Ariputra CV_ENG.pdf';
 
 interface NavbarProps {
   onOpenResume: () => void;
@@ -217,16 +218,25 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume, darkMode, onToggle
               </div>
 
               {/* Bottom Actions Footer */}
-              <div className="p-6 pt-4 border-t border-outline-variant/20 space-y-3 shrink-0 bg-surface dark:bg-surface-container">
+              <div className="p-6 pt-4 border-t border-outline-variant/20 space-y-2.5 shrink-0 bg-surface dark:bg-surface-container">
+                <a
+                  href={cvPdf}
+                  download="Maulana Hafizh Ariputra CV_ENG.pdf"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="w-full py-3 bg-primary text-on-primary font-label-md text-xs font-bold rounded-lg hover:opacity-90 transition-opacity cursor-pointer flex items-center justify-center gap-2 shadow-sm"
+                >
+                  <span className="material-symbols-outlined text-sm">download</span>
+                  Download CV (PDF)
+                </a>
                 <button
                   onClick={() => {
                     setIsMobileMenuOpen(false);
                     onOpenResume();
                   }}
-                  className="w-full py-3 bg-primary text-on-primary font-label-md text-xs font-bold rounded-lg hover:opacity-90 transition-opacity cursor-pointer flex items-center justify-center gap-2 shadow-sm"
+                  className="w-full py-2.5 border border-outline-variant/40 text-on-surface hover:text-primary font-label-md text-xs font-bold rounded-lg transition-colors cursor-pointer flex items-center justify-center gap-2"
                 >
-                  <span className="material-symbols-outlined text-sm">description</span>
-                  View Resume
+                  <span className="material-symbols-outlined text-sm">visibility</span>
+                  View Resume Online
                 </button>
               </div>
             </div>

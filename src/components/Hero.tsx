@@ -1,11 +1,12 @@
 import React from 'react';
 import profileImage from "../assets/Profile.jpeg";
+import cvPdf from "../assets/Maulana Hafizh Ariputra CV_ENG.pdf";
 
 interface HeroProps {
-  onOpenResume: () => void;
+  onOpenResume?: () => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ onOpenResume }) => {
+export const Hero: React.FC<HeroProps> = () => {
   return (
     <section
       id="about"
@@ -26,12 +27,15 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume }) => {
           I am an Informatics Engineering graduate specializing in Fullstack Web Development and Machine Learning. I enjoy building responsive, reliable web applications and developing intelligent, data-driven solutions using modern technologies. With experience in frontend and backend development, database management, API integration, and machine learning, I am passionate about turning ideas into practical digital solutions while continuously learning and growing as a technology professional.
         </p>
         <div className="flex flex-wrap gap-4 pt-4">
-          <button
-            onClick={onOpenResume}
-            className="px-6 py-3 bg-primary text-on-primary font-label-md text-label-md font-semibold rounded hover:opacity-90 active:scale-95 transition-all cursor-pointer shadow-lg shadow-primary/20"
+          <a
+            href={cvPdf}
+            download="Maulana Hafizh Ariputra CV_ENG.pdf"
+            className="px-6 py-3 bg-primary text-on-primary font-label-md text-label-md font-semibold rounded hover:opacity-90 active:scale-95 transition-all cursor-pointer shadow-lg shadow-primary/20 flex items-center gap-2"
+            title="Download CV (PDF)"
           >
+            <span className="material-symbols-outlined text-lg">download</span>
             Download CV
-          </button>
+          </a>
           <a
             href="#contact"
             className="px-6 py-3 border border-outline-variant text-on-surface hover:border-primary hover:text-primary font-label-md text-label-md font-semibold rounded active:scale-95 transition-all cursor-pointer flex items-center justify-center"

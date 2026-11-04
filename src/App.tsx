@@ -13,6 +13,7 @@ import { Footer } from './components/Footer';
 import { Modal } from './components/Modal';
 import { Toast } from './components/Toast';
 import { ImageCarousel } from './components/ImageCarousel';
+import cvPdf from './assets/Maulana Hafizh Ariputra CV_ENG.pdf';
 
 function App() {
   const [darkMode, setDarkMode] = useState<boolean>(() => {
@@ -472,7 +473,16 @@ function App() {
             </p>
           </div>
 
-          <div className="flex justify-end gap-3 pt-6 border-t border-outline-variant/20">
+          <div className="flex flex-wrap justify-end gap-3 pt-6 border-t border-outline-variant/20">
+            <a
+              href={cvPdf}
+              download="Maulana Hafizh Ariputra CV_ENG.pdf"
+              className="px-6 py-2 bg-primary text-on-primary font-label-md text-label-md font-semibold rounded cursor-pointer hover:opacity-90 transition-opacity flex items-center gap-2 shadow-sm"
+              title="Download CV (PDF)"
+            >
+              <span className="material-symbols-outlined text-sm">download</span>
+              Download PDF
+            </a>
             <button
               onClick={() => window.print()}
               className="px-6 py-2 border border-outline text-on-surface hover:border-primary hover:text-primary font-label-md text-label-md font-semibold rounded cursor-pointer transition-colors flex items-center gap-2"
@@ -482,7 +492,7 @@ function App() {
             </button>
             <button
               onClick={() => setIsResumeOpen(false)}
-              className="px-6 py-2 bg-primary text-on-primary font-label-md text-label-md font-semibold rounded cursor-pointer hover:opacity-90 transition-opacity"
+              className="px-6 py-2 bg-surface-container border border-outline-variant/30 text-on-surface hover:bg-surface-container-high font-label-md text-label-md font-semibold rounded cursor-pointer transition-colors"
             >
               Close
             </button>
