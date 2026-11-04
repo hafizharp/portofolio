@@ -12,11 +12,6 @@ export const Skills: React.FC = () => {
       title: 'Machine Learning & AI',
       desc: 'Developing intelligent solutions using Python, TensorFlow, and Computer Vision — from data preprocessing and model training to evaluation and deployment.',
     },
-    {
-      icon: 'design_services',
-      title: 'UI/UX Design',
-      desc: 'Designing intuitive, accessible user interfaces with Figma following Design Thinking methodology, ensuring user-centered experiences across platforms.',
-    },
   ];
 
   const hardSkills = [
@@ -61,7 +56,7 @@ export const Skills: React.FC = () => {
       {/* Areas of Expertise */}
       <div className="space-y-stack-lg mb-10">
         <h2 className="font-headline-lg text-headline-lg text-on-surface">Areas of Expertise</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-gutter">
           {expertise.map((item, index) => (
             <div
               key={index}
