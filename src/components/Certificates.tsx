@@ -34,7 +34,6 @@ export const Certificates: React.FC<CertificatesProps> = ({ onSelectCertificate 
       title: 'Junior Network Administrator',
       issuer: 'National Professional Certification Board (BNSP)',
       date: 'Apr 2022 — Apr 2025',
-      score: '80 / 100',
       icon: 'verified',
       type: 'certification',
       categoryArea: 'Information Technology & Computer Networks',
@@ -191,9 +190,6 @@ export const Certificates: React.FC<CertificatesProps> = ({ onSelectCertificate 
         <h2 className="font-headline-lg text-headline-lg text-on-surface">
           Certification & Training
         </h2>
-        <p className="font-body-md text-on-surface-variant mt-2 max-w-2xl">
-          National professional certifications and intensive industry training programs across Data Science, Data Analytics, SQL, Quality Assurance, and Office Productivity Tools.
-        </p>
       </div>
 
       {/* Filter Tabs */}
@@ -242,25 +238,18 @@ export const Certificates: React.FC<CertificatesProps> = ({ onSelectCertificate 
                 <div className="w-12 h-12 rounded-lg bg-surface-container dark:bg-surface-container-high text-primary flex items-center justify-center group-hover:scale-105 transition-transform">
                   <span className="material-symbols-outlined text-2xl">{cert.icon}</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  {cert.score && (
-                    <span className="px-2 py-0.5 rounded-md text-[11px] font-bold bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20">
-                      Score: {cert.score}
-                    </span>
-                  )}
-                  <span
-                    className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider ${
-                      cert.type === 'certification'
-                        ? 'bg-primary/10 text-primary border border-primary/20'
-                        : 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20'
-                    }`}
-                  >
-                    <span className="material-symbols-outlined text-sm">
-                      {cert.type === 'certification' ? 'workspace_premium' : 'school'}
-                    </span>
-                    {cert.type === 'certification' ? 'Certification' : 'Training'}
+                <span
+                  className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider ${
+                    cert.type === 'certification'
+                      ? 'bg-primary/10 text-primary border border-primary/20'
+                      : 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20'
+                  }`}
+                >
+                  <span className="material-symbols-outlined text-sm">
+                    {cert.type === 'certification' ? 'workspace_premium' : 'school'}
                   </span>
-                </div>
+                  {cert.type === 'certification' ? 'Certification' : 'Training'}
+                </span>
               </div>
 
               {/* Title */}

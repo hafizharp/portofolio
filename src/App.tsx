@@ -209,11 +209,6 @@ function App() {
                     </span>
                     {selectedCertificate.type === 'certification' ? 'Certification' : 'Training'}
                   </span>
-                  {selectedCertificate.score && (
-                    <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20">
-                      Score: {selectedCertificate.score}
-                    </span>
-                  )}
                 </div>
                 <p className="font-headline-md text-base font-semibold text-primary">
                   {selectedCertificate.issuer}
@@ -448,7 +443,7 @@ function App() {
                 <span className="font-body-md text-on-surface">Junior Network Administrator — Badan Nasional Sertifikasi Profesi (BNSP)</span>
                 <span className="font-label-sm text-label-sm text-on-surface-variant shrink-0 ml-4">Apr 2022 — Apr 2025</span>
               </div>
-              <p className="font-body-md text-xs text-on-surface-variant">Score: 80 / 100 • National Professional Certification</p>
+              <p className="font-body-md text-xs text-on-surface-variant">National Professional Competency Certification</p>
             </div>
             <div className="space-y-1">
               <div className="flex justify-between items-baseline font-semibold">

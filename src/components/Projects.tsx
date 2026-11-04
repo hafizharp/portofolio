@@ -265,11 +265,8 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-stack-lg animate-[fadeIn_0.5s_ease-out]">
         <div>
           <h2 className="font-headline-lg text-headline-lg text-on-surface">
-            Featured Projects
+            Projects
           </h2>
-          <p className="font-body-md text-on-surface-variant mt-2 max-w-2xl">
-            Selected works showcasing fullstack web applications, UI/UX design, and machine learning solutions.
-          </p>
         </div>
 
         {/* Quick Slider Controls in Header */}
@@ -313,20 +310,18 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
             <button
               key={tab.key}
               onClick={() => handleCategoryChange(tab.key)}
-              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full font-label-md text-label-md font-semibold transition-all duration-300 cursor-pointer border ${
-                isActive
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full font-label-md text-label-md font-semibold transition-all duration-300 cursor-pointer border ${isActive
                   ? 'bg-primary text-on-primary border-primary shadow-md'
                   : 'bg-surface-container-lowest dark:bg-surface-container border-outline-variant/30 text-on-surface-variant hover:border-primary hover:text-primary'
-              }`}
+                }`}
             >
               <span className="material-symbols-outlined text-base">{tab.icon}</span>
               <span>{tab.label}</span>
               <span
-                className={`ml-0.5 text-xs px-1.5 py-0.5 rounded-full ${
-                  isActive
+                className={`ml-0.5 text-xs px-1.5 py-0.5 rounded-full ${isActive
                     ? 'bg-on-primary/20 text-on-primary'
                     : 'bg-surface-container dark:bg-surface-container-high text-on-surface-variant'
-                }`}
+                  }`}
               >
                 {count}
               </span>
@@ -377,11 +372,10 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
                           {/* Category Pill Tag */}
                           <div className="absolute top-3 right-3">
                             <span
-                              className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider backdrop-blur-md shadow-sm border ${
-                                project.category === 'machine-learning'
+                              className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider backdrop-blur-md shadow-sm border ${project.category === 'machine-learning'
                                   ? 'bg-purple-950/80 text-purple-200 border-purple-500/30'
                                   : 'bg-surface-container-lowest/90 dark:bg-surface-container/90 text-primary border-outline-variant/30'
-                              }`}
+                                }`}
                             >
                               <span className="material-symbols-outlined text-xs">
                                 {project.category === 'machine-learning' ? 'psychology' : 'code'}
@@ -484,11 +478,10 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
                 <button
                   key={idx}
                   onClick={() => setCurrentPage(idx)}
-                  className={`w-9 h-9 rounded-lg font-label-md text-xs font-bold transition-all cursor-pointer flex items-center justify-center ${
-                    currentPage === idx
+                  className={`w-9 h-9 rounded-lg font-label-md text-xs font-bold transition-all cursor-pointer flex items-center justify-center ${currentPage === idx
                       ? 'bg-primary text-on-primary shadow-md scale-105'
                       : 'bg-surface-container-lowest dark:bg-surface-container border border-outline-variant/30 text-on-surface-variant hover:border-primary hover:text-primary'
-                  }`}
+                    }`}
                   aria-label={`Go to page ${idx + 1}`}
                 >
                   {idx + 1}
