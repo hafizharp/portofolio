@@ -173,6 +173,9 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 40px;
   overflow-y: scroll;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
 }
 
 section[id] {
@@ -298,4 +301,45 @@ section[id] {
   opacity: 1 !important;
   transform: translateY(0) !important;
   transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ─── Mobile-first responsive overrides ─── */
+
+/* Smaller display font on very small screens (< 400px) */
+@media (max-width: 400px) {
+  :root {
+    --text-display-lg-mobile: 30px;
+    --text-display-lg-mobile--line-height: 1.25;
+    --text-headline-lg: 24px;
+    --text-headline-lg--line-height: 32px;
+    --text-headline-md: 20px;
+    --text-headline-md--line-height: 28px;
+    --text-body-lg: 16px;
+    --text-body-lg--line-height: 24px;
+  }
+}
+
+/* Ensure touch targets are at least 44px (WCAG) */
+@media (pointer: coarse) {
+  button,
+  a,
+  [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Except inline text links and icon-only buttons that already have padding */
+  a:not([class*="px-"]):not([class*="py-"]):not([class*="p-"]) {
+    min-height: unset;
+    min-width: unset;
+  }
+}
+
+/* Fix horizontal overflow globally */
+body {
+  overflow-x: hidden;
+}
+
+#root {
+  overflow-x: hidden;
 }

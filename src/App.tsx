@@ -212,15 +212,9 @@ function App() {
                 <p className="font-headline-md text-base font-semibold text-primary">
                   {selectedCertificate.issuer}
                 </p>
-                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-on-surface-variant/70 font-semibold mt-0.5">
-                  <span>Issued: {selectedCertificate.date}</span>
-                  {selectedCertificate.location && <span>• {selectedCertificate.location}</span>}
-                </div>
-                {selectedCertificate.categoryArea && (
-                  <p className="text-[11px] text-on-surface-variant/80 mt-1 font-medium">
-                    {selectedCertificate.categoryArea}
-                  </p>
-                )}
+                <p className="font-label-sm text-xs text-on-surface-variant/70 font-semibold mt-0.5">
+                  Issued: {selectedCertificate.date}
+                </p>
               </div>
             </div>
 
@@ -250,6 +244,31 @@ function App() {
                     </span>
                   ))}
                 </div>
+              </div>
+            )}
+
+            {/* Google Drive Link */}
+            {(selectedCertificate.driveUrl || selectedCertificate.credentialUrl) && (
+              <div className="pt-4 border-t border-outline-variant/20 flex items-center justify-start">
+                <a
+                  href={selectedCertificate.driveUrl || selectedCertificate.credentialUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-4 py-2.5 rounded-lg border border-outline-variant/30 bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-xs font-semibold hover:border-primary transition-all cursor-pointer group"
+                >
+                  <svg className="w-4 h-4 shrink-0" viewBox="0 0 87.3 78">
+                    <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8H0c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
+                    <path d="M43.65 25 29.9 1.2c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44C.4 50 0 51.55 0 53.1h27.5z" fill="#00ac47"/>
+                    <path d="M73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5H60l7.35 12.7z" fill="#ea4335"/>
+                    <path d="M43.65 25 57.4 1.2C56.05.4 54.5 0 52.9 0H34.4c-1.6 0-3.15.4-4.5 1.2z" fill="#00832d"/>
+                    <path d="m59.8 53.1-13.75-23.8-13.75 23.8h30.2z" fill="#2684fc"/>
+                    <path d="M73.4 26.5 60 53.1h27.3c0-1.55-.4-3.1-1.2-4.5l-8.9-15.45c-.8-1.4-1.95-2.5-3.3-3.3z" fill="#ffba00"/>
+                  </svg>
+                  <span>View on Google Drive</span>
+                  <span className="material-symbols-outlined text-sm group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">
+                    open_in_new
+                  </span>
+                </a>
               </div>
             )}
           </div>
@@ -331,6 +350,48 @@ function App() {
                 ))}
               </ul>
             </div>
+
+            {/* Project Action Links (GitHub / Figma) */}
+            {(selectedProject.githubUrl || selectedProject.figmaUrl || selectedProject.externalUrl) && (
+              <div className="pt-5 border-t border-outline-variant/20 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3">
+                {selectedProject.githubUrl && (
+                  <a
+                    href={selectedProject.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-outline-variant/30 bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-xs font-semibold hover:border-primary transition-all cursor-pointer group"
+                  >
+                    <svg className="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24">
+                      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                    </svg>
+                    <span>View on GitHub</span>
+                    <span className="material-symbols-outlined text-sm group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">
+                      open_in_new
+                    </span>
+                  </a>
+                )}
+                {(selectedProject.figmaUrl || selectedProject.externalUrl) && (
+                  <a
+                    href={selectedProject.figmaUrl || selectedProject.externalUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-outline-variant/30 bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-xs font-semibold hover:border-primary transition-all cursor-pointer group"
+                  >
+                    <svg className="w-4 h-4 shrink-0" viewBox="0 0 38 57" fill="none">
+                      <path d="M19 28.5C19 23.2533 23.2533 19 28.5 19C33.7467 19 38 23.2533 38 28.5C38 33.7467 33.7467 38 28.5 38C23.2533 38 19 33.7467 19 28.5Z" fill="#1ABCFE"/>
+                      <path d="M0 47.5C0 42.2533 4.25329 38 9.5 38H19V47.5C19 52.7467 14.7467 57 9.5 57C4.25329 57 0 52.7467 0 47.5Z" fill="#0ACF83"/>
+                      <path d="M19 0V19H28.5C33.7467 19 38 14.7467 38 9.5C38 4.25329 33.7467 0 28.5 0H19Z" fill="#FF7262"/>
+                      <path d="M0 9.5C0 14.7467 4.25329 19 9.5 19H19V0H9.5C4.25329 0 0 4.25329 0 9.5Z" fill="#F24E1E"/>
+                      <path d="M0 28.5C0 33.7467 4.25329 38 9.5 38H19V19H9.5C4.25329 19 0 23.2533 0 28.5Z" fill="#A259FF"/>
+                    </svg>
+                    <span>View on Figma</span>
+                    <span className="material-symbols-outlined text-sm group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">
+                      open_in_new
+                    </span>
+                  </a>
+                )}
+              </div>
+            )}
           </div>
         )}
       </Modal>
@@ -382,18 +443,18 @@ function App() {
               Education
             </h4>
             <div className="space-y-1">
-              <div className="flex justify-between items-baseline font-semibold">
-                <span className="font-body-lg text-on-surface">Bachelor of Informatics Engineering — Universitas Trisakti</span>
-                <span className="font-label-sm text-label-sm text-on-surface-variant shrink-0 ml-4">Sep 2022 — Aug 2026</span>
+              <div className="flex flex-col sm:flex-row sm:justify-between items-start sm:items-baseline font-semibold gap-0.5 sm:gap-2">
+                <span className="font-body-lg text-sm sm:text-body-lg text-on-surface">Bachelor of Informatics Engineering — Universitas Trisakti</span>
+                <span className="font-label-sm text-xs text-on-surface-variant shrink-0">Sep 2022 — Aug 2026</span>
               </div>
-              <p className="font-body-md text-body-md text-on-surface-variant">GPA: 3.22/4.00</p>
+              <p className="font-body-md text-xs sm:text-body-md text-on-surface-variant">GPA: 3.22/4.00</p>
             </div>
             <div className="space-y-1">
-              <div className="flex justify-between items-baseline font-semibold">
-                <span className="font-body-lg text-on-surface">Computer and Network Engineering — SMK Ki Hajar Dewantoro</span>
-                <span className="font-label-sm text-label-sm text-on-surface-variant shrink-0 ml-4">Jul 2019 — Jun 2022</span>
+              <div className="flex flex-col sm:flex-row sm:justify-between items-start sm:items-baseline font-semibold gap-0.5 sm:gap-2">
+                <span className="font-body-lg text-sm sm:text-body-lg text-on-surface">Computer and Network Engineering — SMK Ki Hajar Dewantoro</span>
+                <span className="font-label-sm text-xs text-on-surface-variant shrink-0">Jul 2019 — Jun 2022</span>
               </div>
-              <p className="font-body-md text-body-md text-on-surface-variant">Score: 85.85/100.00</p>
+              <p className="font-body-md text-xs sm:text-body-md text-on-surface-variant">Score: 85.85/100.00</p>
             </div>
           </div>
 

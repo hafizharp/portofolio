@@ -61,7 +61,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }
 
   return (
     <div
-      className="fixed inset-0 z-100 flex items-center justify-center p-4 md:p-6"
+      className="fixed inset-0 z-100 flex items-center justify-center p-3 sm:p-4 md:p-6"
       role="dialog"
       aria-modal="true"
     >
@@ -75,20 +75,20 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }
       <div
         ref={modalRef}
         tabIndex={-1}
-        className="relative bg-surface dark:bg-surface-container border border-outline-variant/30 rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-hidden shadow-2xl flex flex-col z-10 animate-[modalEnter_0.25s_cubic-bezier(0.16,1,0.3,1)] will-change-[transform,opacity] transform-gpu focus:outline-none"
+        className="relative bg-surface dark:bg-surface-container border border-outline-variant/30 rounded-2xl max-w-2xl w-full max-h-[92vh] sm:max-h-[85vh] overflow-hidden shadow-2xl flex flex-col z-10 animate-[modalEnter_0.25s_cubic-bezier(0.16,1,0.3,1)] will-change-[transform,opacity] transform-gpu focus:outline-none"
       >
         {/* Header - Solid background without expensive blur filter */}
         <div
-          className={`flex justify-between items-center px-6 py-4 border-b shrink-0 bg-surface dark:bg-surface-container z-10 transition-shadow duration-200 ${
+          className={`flex justify-between items-center px-4 sm:px-6 py-3.5 sm:py-4 border-b shrink-0 bg-surface dark:bg-surface-container z-10 transition-shadow duration-200 gap-3 ${
             hasScrolled
               ? 'border-outline-variant/30 shadow-[0_4px_16px_rgba(0,0,0,0.08)] dark:shadow-[0_4px_16px_rgba(0,0,0,0.35)]'
               : 'border-outline-variant/20 shadow-none'
           }`}
         >
-          <h3 className="font-headline-md text-headline-md text-on-surface font-bold">{title}</h3>
+          <h3 className="font-headline-md text-base sm:text-lg md:text-headline-md text-on-surface font-bold truncate pr-1">{title}</h3>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-full hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors flex items-center justify-center cursor-pointer focus:outline-none"
+            className="p-1.5 rounded-full hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors flex items-center justify-center cursor-pointer focus:outline-none shrink-0"
             aria-label="Close modal"
           >
             <span className="material-symbols-outlined text-lg">close</span>
@@ -98,7 +98,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }
         {/* Scrollable Content - GPU Accelerated Composition */}
         <div
           ref={scrollContentRef}
-          className="p-6 md:p-8 overflow-y-auto flex-1 text-on-surface-variant font-body-md text-body-md leading-relaxed overscroll-contain custom-scrollbar transform-gpu contain-paint will-change-[scroll-position]"
+          className="p-4 sm:p-6 md:p-8 overflow-y-auto flex-1 text-on-surface-variant font-body-md text-sm sm:text-body-md leading-relaxed overscroll-contain custom-scrollbar transform-gpu contain-paint will-change-[scroll-position]"
         >
           {children}
         </div>

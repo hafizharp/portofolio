@@ -86,29 +86,29 @@ export const Contact: React.FC<ContactProps> = ({ onShowToast }) => {
         {/* Contact Info Text */}
         <div className="space-y-stack-lg flex flex-col justify-center">
           <div>
-            <h2 className="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-2 animate-[fadeIn_0.5s_ease-out]">
+            <h2 className="font-display-lg-mobile md:font-display-lg text-3xl sm:text-display-lg-mobile md:text-display-lg text-on-surface mb-2 animate-[fadeIn_0.5s_ease-out]">
               Let's Talk.
             </h2>
-            <p className="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+            <p className="font-body-lg text-sm sm:text-base md:text-body-lg text-on-surface-variant leading-relaxed">
               Currently open for new opportunities. Whether you have a question or just want to say
               hi, I'll try my best to get back to you.
             </p>
           </div>
           <div className="space-y-4">
-            <div className="flex items-center gap-4 group">
-              <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">
+            <div className="flex items-center gap-3 sm:gap-4 group">
+              <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform shrink-0">
                 mail
               </span>
               <a
-                className="font-body-md text-body-md text-on-surface hover:text-primary transition-colors font-medium"
+                className="font-body-md text-sm sm:text-body-md text-on-surface hover:text-primary transition-colors font-medium break-all sm:break-normal"
                 href="mailto:maulanahafizh234@gmail.com"
               >
                 maulanahafizh234@gmail.com
               </a>
             </div>
-            <div className="flex items-center gap-4">
-              <span className="material-symbols-outlined text-primary">location_on</span>
-              <span className="font-body-md text-body-md text-on-surface font-medium">
+            <div className="flex items-center gap-3 sm:gap-4">
+              <span className="material-symbols-outlined text-primary shrink-0">location_on</span>
+              <span className="font-body-md text-sm sm:text-body-md text-on-surface font-medium">
                 KOTA TANGERANG, INDONESIA
               </span>
             </div>
@@ -118,7 +118,7 @@ export const Contact: React.FC<ContactProps> = ({ onShowToast }) => {
         {/* Contact Form */}
         <form
           onSubmit={handleSubmit}
-          className="bg-surface-container-low dark:bg-surface-container p-6 md:p-8 rounded-lg border border-outline-variant/30 flex flex-col gap-4 shadow-sm"
+          className="bg-surface-container-low dark:bg-surface-container p-5 sm:p-6 md:p-8 rounded-lg border border-outline-variant/30 flex flex-col gap-4 shadow-sm"
           noValidate
         >
           {/* Name Field */}

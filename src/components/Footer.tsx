@@ -64,9 +64,9 @@ export const Footer: React.FC = () => {
 
   return (
     <footer className="bg-surface-container-lowest dark:bg-surface-container w-full py-6 border-t border-outline-variant/20 transition-colors duration-300 relative">
-      <div className="flex justify-center items-center px-gutter max-w-container-max mx-auto">
+      <div className="flex justify-center items-center px-margin-mobile md:px-gutter max-w-container-max mx-auto">
         {/* Social Icons Only */}
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4 sm:gap-6">
           {socialLinks.map((social, index) => (
             <a
               key={index}
@@ -87,7 +87,7 @@ export const Footer: React.FC = () => {
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-6 right-24 z-90 p-3 bg-primary text-on-primary rounded-full hover:opacity-90 hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer shadow-lg flex items-center justify-center border border-outline-variant/30"
+          className="fixed bottom-5 right-5 sm:bottom-6 sm:right-8 z-40 p-2.5 sm:p-3 bg-primary text-on-primary rounded-full hover:opacity-90 hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer shadow-lg flex items-center justify-center border border-outline-variant/30"
           aria-label="Scroll back to top"
         >
           <span className="material-symbols-outlined font-bold text-sm">arrow_upward</span>

@@ -15,6 +15,8 @@ export interface Project {
   results: string[];
   year: string;
   externalUrl?: string;
+  githubUrl?: string;
+  figmaUrl?: string;
 }
 
 interface ProjectsProps {
@@ -58,6 +60,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
       icon: 'newspaper',
       year: '2026',
       tech: ['REACT', 'EXPRESS.JS', 'NODE.JS', 'REST API'],
+      githubUrl: 'https://github.com/hafizharp',
       challenge:
         'Building a news portal that supports multiple user roles with different access permissions while ensuring structured and efficient content management.',
       solution:
@@ -76,7 +79,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
       icon: 'design_services',
       year: '2024',
       tech: ['FIGMA', 'UI/UX', 'DESIGN THINKING', 'PROTOTYPING'],
-      externalUrl: 'https://www.figma.com/design/zR0VlNt4MocEtYtI4PH5EQ/SI?node-id=0-1',
+      figmaUrl: 'https://www.figma.com/design/zR0VlNt4MocEtYtI4PH5EQ/SI?node-id=0-1',
       challenge:
         'Creating an intuitive interface for deploying intelligent system projects that is accessible to users with varying technical backgrounds.',
       solution:
@@ -94,7 +97,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
       icon: 'palette',
       year: '2023',
       tech: ['FIGMA', 'UI/UX', 'DESIGN THINKING', 'USER RESEARCH'],
-      externalUrl: 'https://www.figma.com/design/de9uW8aKmTug8rthaN01uO/Untitled?node-id=0-1',
+      figmaUrl: 'https://www.figma.com/design/de9uW8aKmTug8rthaN01uO/Untitled?node-id=0-1',
       challenge:
         'Designing a seamless mobile application experience that meets diverse user needs while maintaining visual appeal and usability.',
       solution:
@@ -114,6 +117,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
       icon: 'visibility',
       year: '2026',
       tech: ['YOLOV8', 'EFFICIENTDET', 'PYTHON', 'ROBOFLOW', 'GOOGLE COLAB'],
+      githubUrl: 'https://github.com/hafizharp',
       challenge:
         'Developing an accurate and efficient object detection system for classroom environments that can count and identify objects in real-time across diverse conditions.',
       solution:
@@ -132,6 +136,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
       icon: 'dermatology',
       year: '2023',
       tech: ['RESNET-18', 'CNN', 'PYTHON', 'TENSORFLOW'],
+      githubUrl: 'https://github.com/hafizharp',
       challenge:
         'Achieving high accuracy in classifying both acne severity levels (Normal to Level 3) and acne types (Blackhead, Nodule, Papule, Pustule, Whitehead) from skin images.',
       solution:
@@ -149,6 +154,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
       icon: 'real_estate_agent',
       year: '2023',
       tech: ['PYTHON', 'SCIKIT-LEARN', 'PANDAS', 'MATPLOTLIB'],
+      githubUrl: 'https://github.com/hafizharp',
       challenge:
         'Building an accurate predictive model for property prices that accounts for multiple features and provides insights into market trends.',
       solution:
@@ -166,6 +172,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
       icon: 'sports_golf',
       year: '2023',
       tech: ['PYTHON', 'SCIKIT-LEARN', 'DECISION TREE', 'PANDAS'],
+      githubUrl: 'https://github.com/hafizharp',
       challenge:
         'Modeling decision-making patterns based on multiple weather attributes like outlook, temperature, humidity, and wind.',
       solution:
@@ -183,6 +190,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
       icon: 'directions_boat',
       year: '2023',
       tech: ['PYTHON', 'SCIKIT-LEARN', 'PANDAS', 'SEABORN'],
+      githubUrl: 'https://github.com/hafizharp',
       challenge:
         'Exploring factors influencing survival rates and building an accurate classifier from historical Titanic passenger data.',
       solution:
@@ -200,6 +208,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
       icon: 'checkroom',
       year: '2023',
       tech: ['PYTHON', 'SCIKIT-LEARN', 'PANDAS', 'NUMPY'],
+      githubUrl: 'https://github.com/hafizharp',
       challenge:
         'Improving size recommendation accuracy to enhance customer satisfaction and reduce product returns caused by incorrect sizing.',
       solution:
@@ -264,7 +273,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
       {/* Section Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-stack-lg animate-[fadeIn_0.5s_ease-out]">
         <div>
-          <h2 className="font-headline-lg text-headline-lg text-on-surface">
+          <h2 className="font-headline-lg text-2xl sm:text-headline-lg text-on-surface">
             Projects
           </h2>
         </div>
@@ -298,7 +307,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
       </div>
 
       {/* Category Filter Tabs */}
-      <div className="flex flex-wrap gap-2 mb-8">
+      <div className="flex flex-wrap gap-2 mb-6 sm:mb-8">
         {categories.map((tab) => {
           const count =
             tab.key === 'all'
@@ -310,15 +319,15 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
             <button
               key={tab.key}
               onClick={() => handleCategoryChange(tab.key)}
-              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full font-label-md text-label-md font-semibold transition-all duration-300 cursor-pointer border ${isActive
+              className={`inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-label-md text-xs sm:text-label-md font-semibold transition-all duration-300 cursor-pointer border ${isActive
                   ? 'bg-primary text-on-primary border-primary shadow-md'
                   : 'bg-surface-container-lowest dark:bg-surface-container border-outline-variant/30 text-on-surface-variant hover:border-primary hover:text-primary'
                 }`}
             >
-              <span className="material-symbols-outlined text-base">{tab.icon}</span>
+              <span className="material-symbols-outlined text-sm sm:text-base">{tab.icon}</span>
               <span>{tab.label}</span>
               <span
-                className={`ml-0.5 text-xs px-1.5 py-0.5 rounded-full ${isActive
+                className={`ml-0.5 text-[11px] sm:text-xs px-1.5 py-0.5 rounded-full ${isActive
                     ? 'bg-on-primary/20 text-on-primary'
                     : 'bg-surface-container dark:bg-surface-container-high text-on-surface-variant'
                   }`}
@@ -350,89 +359,69 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
             return (
               <div key={pageIdx} className="w-full shrink-0">
                 {/* 2-Row Grid Layout */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 auto-rows-fr">
                   {pageProjects.map((project, index) => (
                     <div
                       key={index}
-                      className="group flex flex-col bg-surface-container-lowest dark:bg-surface-container border border-outline-variant/30 rounded-xl overflow-hidden hover:border-primary dark:hover:border-primary transition-all duration-300 hover:shadow-lg hover:-translate-y-1 h-full justify-between"
+                      className="group flex flex-col bg-surface-container-lowest dark:bg-surface-container border border-outline-variant/30 rounded-xl overflow-hidden hover:border-primary/60 dark:hover:border-primary/60 transition-all duration-300 hover:shadow-md hover:-translate-y-1 h-full justify-between p-4 sm:p-5 md:p-6"
                     >
                       <div>
-                        {/* Project Banner */}
-                        <div className="relative h-44 overflow-hidden bg-primary/5 dark:bg-primary/10 flex items-center justify-center border-b border-outline-variant/10">
-                          {/* Icon-based hero */}
-                          <div className="flex flex-col items-center gap-2 text-primary/30 dark:text-primary/20 group-hover:text-primary/50 transition-colors">
-                            <span className="material-symbols-outlined text-6xl">
+                        {/* Top Header Row: Icon + Category Badge */}
+                        <div className="flex items-center justify-between mb-4">
+                          <div className="w-11 h-11 rounded-lg bg-surface-container dark:bg-surface-container-high text-primary flex items-center justify-center group-hover:scale-105 transition-transform">
+                            <span className="material-symbols-outlined text-2xl">
                               {project.icon || (project.category === 'machine-learning' ? 'psychology' : 'code')}
                             </span>
-                            <span className="font-label-sm text-xs font-bold uppercase tracking-widest text-on-surface-variant/40">
-                              {project.year}
-                            </span>
                           </div>
 
-                          {/* Category Pill Tag */}
-                          <div className="absolute top-3 right-3">
-                            <span
-                              className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider backdrop-blur-md shadow-sm border ${project.category === 'machine-learning'
-                                  ? 'bg-purple-950/80 text-purple-200 border-purple-500/30'
-                                  : 'bg-surface-container-lowest/90 dark:bg-surface-container/90 text-primary border-outline-variant/30'
-                                }`}
-                            >
-                              <span className="material-symbols-outlined text-xs">
-                                {project.category === 'machine-learning' ? 'psychology' : 'code'}
-                              </span>
-                              {project.category === 'machine-learning' ? 'ML' : 'Dev'}
+                          <span
+                            className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider ${
+                              project.category === 'machine-learning'
+                                ? 'bg-purple-950/80 text-purple-200 border border-purple-500/30'
+                                : 'bg-primary/10 text-primary border border-primary/20'
+                            }`}
+                          >
+                            <span className="material-symbols-outlined text-xs">
+                              {project.category === 'machine-learning' ? 'psychology' : 'code'}
                             </span>
-                          </div>
+                            {project.category === 'machine-learning' ? 'ML' : 'Dev'}
+                          </span>
                         </div>
 
-                        {/* Project Meta Info */}
-                        <div className="p-5">
-                          <h3 className="font-headline-md text-base md:text-lg font-bold text-on-surface mb-2 group-hover:text-primary transition-colors leading-snug">
-                            {project.title}
-                          </h3>
-                          <p className="font-body-md text-xs md:text-sm text-on-surface-variant line-clamp-3 leading-relaxed">
-                            {project.desc}
-                          </p>
-                        </div>
-                      </div>
+                        {/* Project Title */}
+                        <h3 className="font-headline-md text-base md:text-lg font-bold text-on-surface mb-3 group-hover:text-primary transition-colors leading-snug">
+                          {project.title}
+                        </h3>
 
-                      {/* Bottom Footer Section */}
-                      <div className="p-5 pt-0">
                         {/* Tech Tags */}
                         <div className="flex flex-wrap gap-1.5 mb-4">
                           {project.tech.map((t, tIdx) => (
                             <span
                               key={tIdx}
-                              className="px-2 py-0.5 bg-surface dark:bg-surface-container-high border border-outline-variant/30 rounded font-mono text-[10px] text-on-surface-variant font-bold uppercase tracking-wider"
+                              className="px-2 py-0.5 bg-surface dark:bg-surface-container-high border border-outline-variant/20 rounded font-mono text-[10px] text-on-surface-variant font-semibold uppercase tracking-wider"
                             >
                               {t}
                             </span>
                           ))}
                         </div>
+                      </div>
 
-                        {/* Action Buttons */}
-                        <div className="flex items-center gap-4 pt-2 border-t border-outline-variant/10">
-                          <button
-                            onClick={() => onSelectProject(project)}
-                            className="inline-flex items-center gap-1.5 font-label-md text-xs text-on-surface hover:text-primary dark:hover:text-primary transition-colors group/link w-fit cursor-pointer font-bold"
-                          >
-                            <span>View Case Study</span>
-                            <span className="material-symbols-outlined text-xs group-hover/link:translate-x-1 transition-transform">
-                              arrow_forward
-                            </span>
-                          </button>
-                          {project.externalUrl && (
-                            <a
-                              href={project.externalUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1 font-label-md text-xs text-primary hover:underline font-bold ml-auto"
-                            >
-                              <span>Open Link</span>
-                              <span className="text-xs font-bold">↗</span>
-                            </a>
-                          )}
-                        </div>
+                      {/* Bottom Footer Section */}
+                      <div className="pt-3 border-t border-outline-variant/15 flex items-center justify-between">
+                        <button
+                          onClick={() => onSelectProject(project)}
+                          className="inline-flex items-center gap-1.5 font-label-md text-xs text-primary font-bold hover:underline transition-colors group/link cursor-pointer"
+                        >
+                          <span>View Case Study</span>
+                          <span className="material-symbols-outlined text-xs group-hover/link:translate-x-1 transition-transform">
+                            arrow_forward
+                          </span>
+                        </button>
+
+                        {/* Date at the bottom right */}
+                        <span className="text-xs font-mono font-semibold text-on-surface-variant/70">
+                          {project.year}
+                        </span>
                       </div>
                     </div>
                   ))}
@@ -460,12 +449,12 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
           </div>
 
           {/* Controls: Prev, Dots/Numbers, Next */}
-          <div className="flex items-center gap-2 order-1 sm:order-2">
+          <div className="flex items-center gap-1.5 sm:gap-2 order-1 sm:order-2 flex-wrap justify-center">
             {/* Prev Button */}
             <button
               onClick={() => setCurrentPage((p) => Math.max(0, p - 1))}
               disabled={currentPage === 0}
-              className="px-3 py-2 rounded-lg border border-outline-variant/30 text-on-surface hover:border-primary hover:text-primary hover:bg-surface-container disabled:opacity-30 disabled:pointer-events-none transition-all cursor-pointer flex items-center gap-1 text-xs font-semibold"
+              className="px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg border border-outline-variant/30 text-on-surface hover:border-primary hover:text-primary hover:bg-surface-container disabled:opacity-30 disabled:pointer-events-none transition-all cursor-pointer flex items-center gap-1 text-xs font-semibold"
               aria-label="Previous Page"
             >
               <span className="material-symbols-outlined text-base">chevron_left</span>
@@ -473,12 +462,12 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
             </button>
 
             {/* Page Buttons / Dots */}
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1 sm:gap-1.5">
               {Array.from({ length: totalPages }).map((_, idx) => (
                 <button
                   key={idx}
                   onClick={() => setCurrentPage(idx)}
-                  className={`w-9 h-9 rounded-lg font-label-md text-xs font-bold transition-all cursor-pointer flex items-center justify-center ${currentPage === idx
+                  className={`w-8 h-8 sm:w-9 sm:h-9 rounded-lg font-label-md text-xs font-bold transition-all cursor-pointer flex items-center justify-center ${currentPage === idx
                       ? 'bg-primary text-on-primary shadow-md scale-105'
                       : 'bg-surface-container-lowest dark:bg-surface-container border border-outline-variant/30 text-on-surface-variant hover:border-primary hover:text-primary'
                     }`}
@@ -493,7 +482,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
             <button
               onClick={() => setCurrentPage((p) => Math.min(totalPages - 1, p + 1))}
               disabled={currentPage === totalPages - 1}
-              className="px-3 py-2 rounded-lg border border-outline-variant/30 text-on-surface hover:border-primary hover:text-primary hover:bg-surface-container disabled:opacity-30 disabled:pointer-events-none transition-all cursor-pointer flex items-center gap-1 text-xs font-semibold"
+              className="px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg border border-outline-variant/30 text-on-surface hover:border-primary hover:text-primary hover:bg-surface-container disabled:opacity-30 disabled:pointer-events-none transition-all cursor-pointer flex items-center gap-1 text-xs font-semibold"
               aria-label="Next Page"
             >
               <span className="hidden xs:inline">Next</span>

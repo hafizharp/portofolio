@@ -158,10 +158,10 @@ export const Experience: React.FC<ExperienceProps> = ({ onSelectExperience }) =>
       </h2>
 
       {/* Tabs Filter */}
-      <div className="flex items-center gap-3 mb-8">
+      <div className="flex items-center gap-2 sm:gap-3 mb-8 overflow-x-auto pb-1 -mx-margin-mobile px-margin-mobile md:mx-0 md:px-0">
         <button
           onClick={() => setActiveTab('work')}
-          className={`px-6 py-2.5 rounded-lg font-label-md text-sm font-semibold transition-all duration-300 cursor-pointer ${
+          className={`px-4 sm:px-6 py-2.5 rounded-lg font-label-md text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer whitespace-nowrap shrink-0 ${
             activeTab === 'work'
               ? 'bg-primary text-on-primary shadow-md shadow-primary/20 scale-[1.02]'
               : 'bg-surface-container dark:bg-surface-container-high text-on-surface-variant hover:text-primary hover:bg-surface-container-highest'
@@ -172,13 +172,13 @@ export const Experience: React.FC<ExperienceProps> = ({ onSelectExperience }) =>
 
         <button
           onClick={() => setActiveTab('organization')}
-          className={`px-6 py-2.5 rounded-lg font-label-md text-sm font-semibold transition-all duration-300 cursor-pointer ${
+          className={`px-4 sm:px-6 py-2.5 rounded-lg font-label-md text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer whitespace-nowrap shrink-0 ${
             activeTab === 'organization'
               ? 'bg-primary text-on-primary shadow-md shadow-primary/20 scale-[1.02]'
               : 'bg-surface-container dark:bg-surface-container-high text-on-surface-variant hover:text-primary hover:bg-surface-container-highest'
           }`}
         >
-          Organization Experience
+          Organization
         </button>
       </div>
 
@@ -187,14 +187,14 @@ export const Experience: React.FC<ExperienceProps> = ({ onSelectExperience }) =>
         {filteredExperiences.map((exp) => (
           <div
             key={exp.id}
-            className="p-6 bg-surface-container-lowest dark:bg-surface-container rounded-lg border border-outline-variant/30 border-l-4 border-l-primary hover:shadow-md transition-all duration-300 flex flex-col md:flex-row md:items-center justify-between gap-4"
+            className="p-4 sm:p-6 bg-surface-container-lowest dark:bg-surface-container rounded-lg border border-outline-variant/30 border-l-4 border-l-primary hover:shadow-md transition-all duration-300 flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4"
           >
             {/* Left Content */}
-            <div className="space-y-1">
-              <h3 className="font-headline-md text-lg font-bold text-on-surface">
+            <div className="space-y-1 min-w-0">
+              <h3 className="font-headline-md text-base sm:text-lg font-bold text-on-surface break-words">
                 {exp.role}
               </h3>
-              <p className="font-body-md text-sm text-on-surface-variant font-medium">
+              <p className="font-body-md text-sm text-on-surface-variant font-medium break-words">
                 {exp.company}
               </p>
               <p className="font-label-sm text-xs text-on-surface-variant/70 font-semibold pt-0.5">

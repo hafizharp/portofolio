@@ -29,7 +29,7 @@ export const Toast: React.FC<ToastProps> = ({
 
   return (
     <div
-      className="fixed bottom-6 right-6 z-100 flex items-center gap-3 px-6 py-4 rounded-lg shadow-2xl border animate-[slideInUp_0.3s_ease-out] backdrop-blur-md"
+      className="fixed bottom-5 left-4 right-4 sm:left-auto sm:right-6 sm:bottom-6 z-100 flex items-center justify-between sm:justify-start gap-3 px-4 sm:px-6 py-3.5 sm:py-4 rounded-lg shadow-2xl border animate-[slideInUp_0.3s_ease-out] backdrop-blur-md max-w-md"
       style={{
         backgroundColor:
           type === 'success'
