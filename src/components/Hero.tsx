@@ -1,6 +1,6 @@
 import React from 'react';
 import profileImage from "../assets/Profile.jpeg";
-import cvPdf from "../assets/Maulana Hafizh Ariputra CV_ENG.pdf";
+import cvPdf from "../assets/Maulana Hafizh Ariputra_CV ENG.pdf";
 
 interface HeroProps {
   onOpenResume?: () => void;
@@ -29,7 +29,7 @@ export const Hero: React.FC<HeroProps> = () => {
         <div className="flex flex-wrap gap-4 pt-4">
           <a
             href={cvPdf}
-            download="Maulana Hafizh Ariputra CV_ENG.pdf"
+            download="Maulana Hafizh Ariputra_CV ENG.pdf"
             className="px-6 py-3 bg-primary text-on-primary font-label-md text-label-md font-semibold rounded hover:opacity-90 active:scale-95 transition-all cursor-pointer shadow-lg shadow-primary/20 flex items-center gap-2"
             title="Download CV (PDF)"
           >

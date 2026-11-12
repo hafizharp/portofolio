@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import cvPdf from '../assets/Maulana Hafizh Ariputra CV_ENG.pdf';
+import cvPdf from '../assets/Maulana Hafizh Ariputra_CV ENG.pdf';
 
 interface NavbarProps {
   onOpenResume: () => void;
@@ -221,7 +221,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume, darkMode, onToggle
               <div className="p-6 pt-4 border-t border-outline-variant/20 space-y-2.5 shrink-0 bg-surface dark:bg-surface-container">
                 <a
                   href={cvPdf}
-                  download="Maulana Hafizh Ariputra CV_ENG.pdf"
+                  download="Maulana Hafizh Ariputra_CV ENG.pdf"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="w-full py-3 bg-primary text-on-primary font-label-md text-xs font-bold rounded-lg hover:opacity-90 transition-opacity cursor-pointer flex items-center justify-center gap-2 shadow-sm"
                 >

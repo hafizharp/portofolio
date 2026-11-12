@@ -13,7 +13,7 @@ import { Footer } from './components/Footer';
 import { Modal } from './components/Modal';
 import { Toast } from './components/Toast';
 import { ImageCarousel } from './components/ImageCarousel';
-import cvPdf from './assets/Maulana Hafizh Ariputra CV_ENG.pdf';
+import cvPdf from './assets/Maulana Hafizh Ariputra_CV ENG.pdf';
 
 function App() {
   const [darkMode, setDarkMode] = useState<boolean>(() => {
@@ -198,11 +198,10 @@ function App() {
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-1 flex-wrap">
                   <span
-                    className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
-                      selectedCertificate.type === 'certification'
+                    className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${selectedCertificate.type === 'certification'
                         ? 'bg-primary/10 text-primary border border-primary/20'
                         : 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20'
-                    }`}
+                      }`}
                   >
                     <span className="material-symbols-outlined text-xs">
                       {selectedCertificate.type === 'certification' ? 'workspace_premium' : 'school'}
@@ -275,11 +274,10 @@ function App() {
             {/* Category & Tech stack info */}
             <div className="flex flex-wrap items-center gap-2">
               <span
-                className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${
-                  selectedProject.category === 'machine-learning'
+                className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${selectedProject.category === 'machine-learning'
                     ? 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20'
                     : 'bg-primary/10 text-primary border border-primary/20'
-                }`}
+                  }`}
               >
                 <span className="material-symbols-outlined text-sm">
                   {selectedProject.category === 'machine-learning' ? 'psychology' : 'code'}
@@ -471,7 +469,7 @@ function App() {
           <div className="flex flex-wrap justify-end gap-3 pt-6 border-t border-outline-variant/20">
             <a
               href={cvPdf}
-              download="Maulana Hafizh Ariputra CV_ENG.pdf"
+              download="Maulana Hafizh Ariputra_CV ENG.pdf"
               className="px-6 py-2 bg-primary text-on-primary font-label-md text-label-md font-semibold rounded cursor-pointer hover:opacity-90 transition-opacity flex items-center gap-2 shadow-sm"
               title="Download CV (PDF)"
             >
