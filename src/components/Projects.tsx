@@ -117,7 +117,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
       icon: 'visibility',
       year: '2026',
       tech: ['YOLOV8', 'EFFICIENTDET', 'PYTHON', 'ROBOFLOW', 'GOOGLE COLAB'],
-      githubUrl: 'https://github.com/hafizharp',
+      githubUrl: 'https://github.com/hafizharp/Tugas-Akhir',
       challenge:
         'Developing an accurate and efficient object detection system for classroom environments that can count and identify objects in real-time across diverse conditions.',
       solution:
@@ -136,7 +136,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
       icon: 'dermatology',
       year: '2023',
       tech: ['RESNET-18', 'CNN', 'PYTHON', 'TENSORFLOW'],
-      githubUrl: 'https://github.com/hafizharp',
+      githubUrl: 'https://github.com/2AM-Labs/AcneInsight',
       challenge:
         'Achieving high accuracy in classifying both acne severity levels (Normal to Level 3) and acne types (Blackhead, Nodule, Papule, Pustule, Whitehead) from skin images.',
       solution:
@@ -154,7 +154,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
       icon: 'real_estate_agent',
       year: '2023',
       tech: ['PYTHON', 'SCIKIT-LEARN', 'PANDAS', 'MATPLOTLIB'],
-      githubUrl: 'https://github.com/hafizharp',
+      githubUrl: 'https://github.com/2AM-Labs/Realestate-Prediction',
       challenge:
         'Building an accurate predictive model for property prices that accounts for multiple features and provides insights into market trends.',
       solution:
@@ -172,7 +172,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
       icon: 'sports_golf',
       year: '2023',
       tech: ['PYTHON', 'SCIKIT-LEARN', 'DECISION TREE', 'PANDAS'],
-      githubUrl: 'https://github.com/hafizharp',
+      githubUrl: 'https://github.com/2AM-Labs/Play-Golf-Prediction',
       challenge:
         'Modeling decision-making patterns based on multiple weather attributes like outlook, temperature, humidity, and wind.',
       solution:
@@ -190,7 +190,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
       icon: 'directions_boat',
       year: '2023',
       tech: ['PYTHON', 'SCIKIT-LEARN', 'PANDAS', 'SEABORN'],
-      githubUrl: 'https://github.com/hafizharp',
+      githubUrl: 'https://github.com/2AM-Labs/Titanic-Survival-Prediction',
       challenge:
         'Exploring factors influencing survival rates and building an accurate classifier from historical Titanic passenger data.',
       solution:
@@ -208,7 +208,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
       icon: 'checkroom',
       year: '2023',
       tech: ['PYTHON', 'SCIKIT-LEARN', 'PANDAS', 'NUMPY'],
-      githubUrl: 'https://github.com/hafizharp',
+      githubUrl: 'https://github.com/2AM-Labs/Cloth-Size-Prediction',
       challenge:
         'Improving size recommendation accuracy to enhance customer satisfaction and reduce product returns caused by incorrect sizing.',
       solution:
@@ -320,16 +320,16 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
               key={tab.key}
               onClick={() => handleCategoryChange(tab.key)}
               className={`inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-label-md text-xs sm:text-label-md font-semibold transition-all duration-300 cursor-pointer border ${isActive
-                  ? 'bg-primary text-on-primary border-primary shadow-md'
-                  : 'bg-surface-container-lowest dark:bg-surface-container border-outline-variant/30 text-on-surface-variant hover:border-primary hover:text-primary'
+                ? 'bg-primary text-on-primary border-primary shadow-md'
+                : 'bg-surface-container-lowest dark:bg-surface-container border-outline-variant/30 text-on-surface-variant hover:border-primary hover:text-primary'
                 }`}
             >
               <span className="material-symbols-outlined text-sm sm:text-base">{tab.icon}</span>
               <span>{tab.label}</span>
               <span
                 className={`ml-0.5 text-[11px] sm:text-xs px-1.5 py-0.5 rounded-full ${isActive
-                    ? 'bg-on-primary/20 text-on-primary'
-                    : 'bg-surface-container dark:bg-surface-container-high text-on-surface-variant'
+                  ? 'bg-on-primary/20 text-on-primary'
+                  : 'bg-surface-container dark:bg-surface-container-high text-on-surface-variant'
                   }`}
               >
                 {count}
@@ -375,11 +375,10 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
                           </div>
 
                           <span
-                            className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider ${
-                              project.category === 'machine-learning'
-                                ? 'bg-purple-950/80 text-purple-200 border border-purple-500/30'
-                                : 'bg-primary/10 text-primary border border-primary/20'
-                            }`}
+                            className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider ${project.category === 'machine-learning'
+                              ? 'bg-purple-950/80 text-purple-200 border border-purple-500/30'
+                              : 'bg-primary/10 text-primary border border-primary/20'
+                              }`}
                           >
                             <span className="material-symbols-outlined text-xs">
                               {project.category === 'machine-learning' ? 'psychology' : 'code'}
@@ -468,8 +467,8 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
                   key={idx}
                   onClick={() => setCurrentPage(idx)}
                   className={`w-8 h-8 sm:w-9 sm:h-9 rounded-lg font-label-md text-xs font-bold transition-all cursor-pointer flex items-center justify-center ${currentPage === idx
-                      ? 'bg-primary text-on-primary shadow-md scale-105'
-                      : 'bg-surface-container-lowest dark:bg-surface-container border border-outline-variant/30 text-on-surface-variant hover:border-primary hover:text-primary'
+                    ? 'bg-primary text-on-primary shadow-md scale-105'
+                    : 'bg-surface-container-lowest dark:bg-surface-container border border-outline-variant/30 text-on-surface-variant hover:border-primary hover:text-primary'
                     }`}
                   aria-label={`Go to page ${idx + 1}`}
                 >

@@ -81,7 +81,7 @@ export const Certificates: React.FC<CertificatesProps> = ({ onSelectCertificate 
       date: 'Nov 2026',
       icon: 'fact_check',
       type: 'training',
-      driveUrl: 'https://drive.google.com/file/d/12yzZ274pjEe03UcOVf2A03DCUz_k3Isz/view?usp=drive_link',
+      driveUrl: 'https://drive.google.com/file/d/1TXW8h9yY4lwxYvKCr6w1efCaw8jAWewI/view?usp=drive_link',
       description:
         'Learned the fundamentals of Quality Assurance (QA) in software engineering, covering core QA principles, test integration across each Software Development Life Cycle (SDLC) phase, and testing support toolsets. Developed a solid understanding of manual and automated testing methodologies, bug identification and reporting workflows, and QA responsibilities in ensuring application quality, functionality, and user reliability.',
       skills: [
@@ -100,7 +100,7 @@ export const Certificates: React.FC<CertificatesProps> = ({ onSelectCertificate 
       date: 'Oct 2026',
       icon: 'database',
       type: 'training',
-      driveUrl: 'https://drive.google.com/file/d/12yzZ274pjEe03UcOVf2A03DCUz_k3Isz/view?usp=drive_link',
+      driveUrl: 'https://drive.google.com/file/d/1C1TEJXOBJaQQHoUNMwtKPI8bbVxn_J2E/view?usp=drive_link',
       description:
         'Practiced and applied SQL for data management and analytics, encompassing CRUD operations, data filtering and sorting, grouping (GROUP BY), aggregate functions, logical operations, table schema modifications, JOINs, string and date functions, Subqueries, Common Table Expressions (CTEs), Stored Procedures, and relational data modeling.',
       skills: [
@@ -119,7 +119,7 @@ export const Certificates: React.FC<CertificatesProps> = ({ onSelectCertificate 
       date: 'Oct 2026',
       icon: 'psychology',
       type: 'training',
-      driveUrl: 'https://drive.google.com/file/d/12yzZ274pjEe03UcOVf2A03DCUz_k3Isz/view?usp=drive_link',
+      driveUrl: 'https://drive.google.com/file/d/1sy5_u5xFXUi3FkRY8tKlJqwA5nIhryqG/view?usp=drive_link',
       description:
         'Studied Data Science fundamentals and their applications in data processing and analysis, using toolchains such as Kaggle, GitHub, and Kedro for end-to-end data project workflows. Developed statistical acumen in descriptive analysis, data visualization, probability distributions, hypothesis testing, and correlation analysis. Covered data preprocessing techniques, core Machine Learning concepts, and initial predictive modeling steps to generate data-driven insights.',
       skills: [
@@ -138,7 +138,7 @@ export const Certificates: React.FC<CertificatesProps> = ({ onSelectCertificate 
       date: 'Oct 2026',
       icon: 'analytics',
       type: 'training',
-      driveUrl: 'https://drive.google.com/file/d/12yzZ274pjEe03UcOVf2A03DCUz_k3Isz/view?usp=drive_link',
+      driveUrl: 'https://drive.google.com/file/d/1C1TEJXOBJaQQHoUNMwtKPI8bbVxn_J2E/view?usp=drive_link',
       description:
         'Practiced comprehensive end-to-end data analysis workflows, from data preparation and wrangling, applied statistics, and business/product metric tracking to cohort and retention analysis. Enhanced analytical proficiency in regression, correlation, inferential statistics, hypothesis testing, A/B testing, clustering, and text analysis, as well as data visualization and communication for data-backed executive decision-making.',
       skills: [
@@ -157,7 +157,7 @@ export const Certificates: React.FC<CertificatesProps> = ({ onSelectCertificate 
       date: 'Oct 2026',
       icon: 'insights',
       type: 'training',
-      driveUrl: 'https://drive.google.com/file/d/12yzZ274pjEe03UcOVf2A03DCUz_k3Isz/view?usp=drive_link',
+      driveUrl: 'https://drive.google.com/file/d/1XWWECLLU5evjrAbmlRxeiwOSNSuDJdPg/view?usp=drive_link',
       description:
         'Explored data analytics fundamentals, from understanding data within business contexts and transforming raw data into actionable insights to presenting findings through data storytelling and executive dashboards. Strengthened understanding of data-driven decision making, business data strategy, information lifecycle management, project phases, and career pathways in analytics.',
       skills: [
@@ -175,7 +175,7 @@ export const Certificates: React.FC<CertificatesProps> = ({ onSelectCertificate 
       date: 'Oct 2026',
       icon: 'table_chart',
       type: 'training',
-      driveUrl: 'https://drive.google.com/file/d/12yzZ274pjEe03UcOVf2A03DCUz_k3Isz/view?usp=drive_link',
+      driveUrl: 'https://drive.google.com/file/d/1_6X5v9BMxgA1YrSB-iqQ27MU4qCnaJJr/view?usp=drive_link',
       description:
         'Mastered foundational Microsoft Excel skills for data management and manipulation, spanning workbook navigation, worksheet structuring, formula application, and nested IF-ELSE logical functions. Developed hands-on capabilities in data cleansing, sorting and filtering, conditional formatting, and data aggregation to generate structured, audit-ready analytical outputs.',
       skills: [
@@ -282,20 +282,18 @@ export const Certificates: React.FC<CertificatesProps> = ({ onSelectCertificate 
             <button
               key={tab.key}
               onClick={() => handleTabChange(tab.key)}
-              className={`inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-label-md text-xs sm:text-label-md font-semibold transition-all duration-300 cursor-pointer border ${
-                isActive
+              className={`inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-label-md text-xs sm:text-label-md font-semibold transition-all duration-300 cursor-pointer border ${isActive
                   ? 'bg-primary text-on-primary border-primary shadow-md'
                   : 'bg-surface-container-lowest dark:bg-surface-container border-outline-variant/30 text-on-surface-variant hover:border-primary hover:text-primary'
-              }`}
+                }`}
             >
               <span className="material-symbols-outlined text-sm sm:text-base">{tab.icon}</span>
               <span>{tab.label}</span>
               <span
-                className={`ml-0.5 text-[11px] sm:text-xs px-1.5 py-0.5 rounded-full ${
-                  isActive
+                className={`ml-0.5 text-[11px] sm:text-xs px-1.5 py-0.5 rounded-full ${isActive
                     ? 'bg-on-primary/20 text-on-primary'
                     : 'bg-surface-container dark:bg-surface-container-high text-on-surface-variant'
-                }`}
+                  }`}
               >
                 {count}
               </span>
@@ -337,11 +335,10 @@ export const Certificates: React.FC<CertificatesProps> = ({ onSelectCertificate 
                             <span className="material-symbols-outlined text-2xl">{cert.icon}</span>
                           </div>
                           <span
-                            className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider ${
-                              cert.type === 'certification'
+                            className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider ${cert.type === 'certification'
                                 ? 'bg-primary/10 text-primary border border-primary/20'
                                 : 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20'
-                            }`}
+                              }`}
                           >
                             <span className="material-symbols-outlined text-sm">
                               {cert.type === 'certification' ? 'workspace_premium' : 'school'}
@@ -439,11 +436,10 @@ export const Certificates: React.FC<CertificatesProps> = ({ onSelectCertificate 
                 <button
                   key={idx}
                   onClick={() => setCurrentPage(idx)}
-                  className={`w-8 h-8 sm:w-9 sm:h-9 rounded-lg font-label-md text-xs font-bold transition-all cursor-pointer flex items-center justify-center ${
-                    currentPage === idx
+                  className={`w-8 h-8 sm:w-9 sm:h-9 rounded-lg font-label-md text-xs font-bold transition-all cursor-pointer flex items-center justify-center ${currentPage === idx
                       ? 'bg-primary text-on-primary shadow-md scale-105'
                       : 'bg-surface-container-lowest dark:bg-surface-container border border-outline-variant/30 text-on-surface-variant hover:border-primary hover:text-primary'
-                  }`}
+                    }`}
                   aria-label={`Go to page ${idx + 1}`}
                 >
                   {idx + 1}
