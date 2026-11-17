@@ -1,6 +1,6 @@
 ## Riwayat Pelatihan
 
-6 pelatihan
+7 pelatihan
 
 ## Quality Assurance Introduction
 
@@ -11,6 +11,14 @@ Nov 2026 - Nov 2026TEKNOLOGI INFORMASI DAN KOMUNIKASI - SYSTEM ANALYSTTebet Timu
 Mempelajari dasar-dasar Quality Assurance (QA) dalam pengembangan perangkat lunak, meliputi prinsip dan fundamental QA, penerapan pengujian pada setiap tahapan Software Development Life Cycle (SDLC), serta pemahaman berbagai tools pendukung pengujian. Mengembangkan pemahaman mengenai metode manual dan automation testing, proses identifikasi serta pelaporan bug, dan pemahaman tanggung jawab QA dalam memastikan kualitas, fungsionalitas, serta keandalan aplikasi
 
 sesuai kebutuhan pengguna.
+
+## Microsoft Excel Intermediate
+
+MySkill
+
+Nov 2026 - Nov 2026TEKNOLOGI INFORMASI DAN KOMUNIKASI - OFFICE TOOLSTebet Timur, Tebet, KOTA ADM. JAKARTA SELATAN, DKI JAKARTA
+
+Mempelajari teknik pengolahan dan analisis data menggunakan Microsoft Excel tingkat menengah, meliputi fungsi pencarian dan referensi data (Lookup, INDEX MATCH), formula matematika dan logika, pengolahan teks dan tanggal, serta penanganan error. Pelatihan ini juga mencakup pengelolaan data menggunakan Table dan Pivot Table, visualisasi melalui Chart, Dynamic Array Formulas, pemformatan data, serta pengaturan pencetakan dan halaman untuk menghasilkan laporan yang terstruktur dan informatif.
 
 ## Microsoft Basic Excel
 

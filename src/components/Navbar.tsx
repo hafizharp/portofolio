@@ -76,7 +76,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume, darkMode, onToggle
 
   return (
     <>
-      <nav className="bg-background/80 dark:bg-background/80 backdrop-blur-md sticky top-0 w-full z-50 border-b border-outline-variant/30 transition-colors duration-300">
+      <div className="h-[68px] md:h-[80px]" aria-hidden="true" />
+      <nav className="fixed top-0 left-0 right-0 bg-background/80 dark:bg-background/80 backdrop-blur-md w-full z-50 border-b border-outline-variant/30 transition-colors duration-300">
         <div className="flex justify-between items-center px-margin-mobile md:px-gutter py-3 md:py-4 max-w-container-max mx-auto">
           {/* Brand */}
           <a

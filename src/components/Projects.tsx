@@ -27,25 +27,11 @@ type FilterCategory = 'all' | 'developer' | 'machine-learning';
 
 export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
   const [activeCategory, setActiveCategory] = useState<FilterCategory>('all');
-  const [currentPage, setCurrentPage] = useState<number>(0);
-  const [itemsPerPage, setItemsPerPage] = useState<number>(6);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(6);
 
-  // Touch swipe state
-  const [touchStartX, setTouchStartX] = useState<number | null>(null);
-  const [touchEndX, setTouchEndX] = useState<number | null>(null);
-
-  // Responsive items per page (strictly 2 rows on every viewport)
   useEffect(() => {
-    const updateItemsPerPage = () => {
-      if (window.innerWidth < 640) {
-        setItemsPerPage(2); // 1 col x 2 rows = 2 items
-      } else if (window.innerWidth < 1024) {
-        setItemsPerPage(4); // 2 cols x 2 rows = 4 items
-      } else {
-        setItemsPerPage(6); // 3 cols x 2 rows = 6 items
-      }
-    };
-
+    const updateItemsPerPage = () => setItemsPerPage(window.innerWidth < 640 ? 2 : window.innerWidth < 1024 ? 4 : 6);
     updateItemsPerPage();
     window.addEventListener('resize', updateItemsPerPage);
     return () => window.removeEventListener('resize', updateItemsPerPage);
@@ -231,39 +217,8 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
     activeCategory === 'all'
       ? projectsList
       : projectsList.filter((project) => project.category === activeCategory);
-
   const totalPages = Math.ceil(filteredProjects.length / itemsPerPage) || 1;
-
-  // Handle category switch
-  const handleCategoryChange = (cat: FilterCategory) => {
-    setActiveCategory(cat);
-    setCurrentPage(0);
-  };
-
-  // Touch swipe handlers
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStartX(e.targetTouches[0].clientX);
-    setTouchEndX(null);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEndX(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchEnd = () => {
-    if (touchStartX === null || touchEndX === null) return;
-    const distance = touchStartX - touchEndX;
-    const minSwipeDistance = 50;
-
-    if (distance > minSwipeDistance && currentPage < totalPages - 1) {
-      setCurrentPage((prev) => prev + 1);
-    } else if (distance < -minSwipeDistance && currentPage > 0) {
-      setCurrentPage((prev) => prev - 1);
-    }
-
-    setTouchStartX(null);
-    setTouchEndX(null);
-  };
+  const pageProjects = filteredProjects.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
 
   return (
     <section
@@ -278,37 +233,12 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
           </h2>
         </div>
 
-        {/* Quick Slider Controls in Header */}
-        {totalPages > 1 && (
-          <div className="hidden sm:flex items-center gap-2 shrink-0">
-            <button
-              onClick={() => setCurrentPage((p) => Math.max(0, p - 1))}
-              disabled={currentPage === 0}
-              className="w-10 h-10 rounded-full border border-outline-variant/30 text-on-surface hover:border-primary hover:text-primary hover:bg-surface-container disabled:opacity-30 disabled:pointer-events-none transition-all cursor-pointer flex items-center justify-center"
-              aria-label="Previous Slide"
-              title="Previous Slide"
-            >
-              <span className="material-symbols-outlined text-xl">chevron_left</span>
-            </button>
-            <span className="font-mono text-xs font-semibold text-on-surface-variant px-1">
-              {currentPage + 1} / {totalPages}
-            </span>
-            <button
-              onClick={() => setCurrentPage((p) => Math.min(totalPages - 1, p + 1))}
-              disabled={currentPage === totalPages - 1}
-              className="w-10 h-10 rounded-full border border-outline-variant/30 text-on-surface hover:border-primary hover:text-primary hover:bg-surface-container disabled:opacity-30 disabled:pointer-events-none transition-all cursor-pointer flex items-center justify-center"
-              aria-label="Next Slide"
-              title="Next Slide"
-            >
-              <span className="material-symbols-outlined text-xl">chevron_right</span>
-            </button>
-          </div>
-        )}
       </div>
 
-      {/* Category Filter Tabs */}
-      <div className="flex flex-wrap gap-2 mb-6 sm:mb-8">
-        {categories.map((tab) => {
+      {/* Project toolbar */}
+      <div className="w-full flex flex-wrap items-center justify-between gap-4 mb-6 sm:mb-8">
+        <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Filter projects by category">
+          {categories.map((tab) => {
           const count =
             tab.key === 'all'
               ? projectsList.length
@@ -318,7 +248,9 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
           return (
             <button
               key={tab.key}
-              onClick={() => handleCategoryChange(tab.key)}
+              type="button"
+              onClick={() => { setActiveCategory(tab.key); setCurrentPage(0); }}
+              aria-pressed={isActive}
               className={`inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-label-md text-xs sm:text-label-md font-semibold transition-all duration-300 cursor-pointer border ${isActive
                 ? 'bg-primary text-on-primary border-primary shadow-md'
                 : 'bg-surface-container-lowest dark:bg-surface-container border-outline-variant/30 text-on-surface-variant hover:border-primary hover:text-primary'
@@ -327,7 +259,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
               <span className="material-symbols-outlined text-sm sm:text-base">{tab.icon}</span>
               <span>{tab.label}</span>
               <span
-                className={`ml-0.5 text-[11px] sm:text-xs px-1.5 py-0.5 rounded-full ${isActive
+                className={`ml-0.5 text-xs px-1.5 py-0.5 rounded-full ${isActive
                   ? 'bg-on-primary/20 text-on-primary'
                   : 'bg-surface-container dark:bg-surface-container-high text-on-surface-variant'
                   }`}
@@ -336,160 +268,61 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
               </span>
             </button>
           );
-        })}
-      </div>
-
-      {/* Slidable Carousel Container (Strictly 2 rows per page) */}
-      <div
-        className="relative overflow-hidden cursor-grab active:cursor-grabbing select-none"
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-      >
-        <div
-          className="flex transition-transform duration-500 ease-out"
-          style={{ transform: `translateX(-${currentPage * 100}%)` }}
-        >
-          {Array.from({ length: totalPages }).map((_, pageIdx) => {
-            const pageProjects = filteredProjects.slice(
-              pageIdx * itemsPerPage,
-              (pageIdx + 1) * itemsPerPage
-            );
-
-            return (
-              <div key={pageIdx} className="w-full shrink-0">
-                {/* 2-Row Grid Layout */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 auto-rows-fr">
-                  {pageProjects.map((project, index) => (
-                    <div
-                      key={index}
-                      className="group flex flex-col bg-surface-container-lowest dark:bg-surface-container border border-outline-variant/30 rounded-xl overflow-hidden hover:border-primary/60 dark:hover:border-primary/60 transition-all duration-300 hover:shadow-md hover:-translate-y-1 h-full justify-between p-4 sm:p-5 md:p-6"
-                    >
-                      <div>
-                        {/* Top Header Row: Icon + Category Badge */}
-                        <div className="flex items-center justify-between mb-4">
-                          <div className="w-11 h-11 rounded-lg bg-surface-container dark:bg-surface-container-high text-primary flex items-center justify-center group-hover:scale-105 transition-transform">
-                            <span className="material-symbols-outlined text-2xl">
-                              {project.icon || (project.category === 'machine-learning' ? 'psychology' : 'code')}
-                            </span>
-                          </div>
-
-                          <span
-                            className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider ${project.category === 'machine-learning'
-                              ? 'bg-purple-950/80 text-purple-200 border border-purple-500/30'
-                              : 'bg-primary/10 text-primary border border-primary/20'
-                              }`}
-                          >
-                            <span className="material-symbols-outlined text-xs">
-                              {project.category === 'machine-learning' ? 'psychology' : 'code'}
-                            </span>
-                            {project.category === 'machine-learning' ? 'ML' : 'Dev'}
-                          </span>
-                        </div>
-
-                        {/* Project Title */}
-                        <h3 className="font-headline-md text-base md:text-lg font-bold text-on-surface mb-3 group-hover:text-primary transition-colors leading-snug">
-                          {project.title}
-                        </h3>
-
-                        {/* Tech Tags */}
-                        <div className="flex flex-wrap gap-1.5 mb-4">
-                          {project.tech.map((t, tIdx) => (
-                            <span
-                              key={tIdx}
-                              className="px-2 py-0.5 bg-surface dark:bg-surface-container-high border border-outline-variant/20 rounded font-mono text-[10px] text-on-surface-variant font-semibold uppercase tracking-wider"
-                            >
-                              {t}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Bottom Footer Section */}
-                      <div className="pt-3 border-t border-outline-variant/15 flex items-center justify-between">
-                        <button
-                          onClick={() => onSelectProject(project)}
-                          className="inline-flex items-center gap-1.5 font-label-md text-xs text-primary font-bold hover:underline transition-colors group/link cursor-pointer"
-                        >
-                          <span>View Case Study</span>
-                          <span className="material-symbols-outlined text-xs group-hover/link:translate-x-1 transition-transform">
-                            arrow_forward
-                          </span>
-                        </button>
-
-                        {/* Date at the bottom right */}
-                        <span className="text-xs font-mono font-semibold text-on-surface-variant/70">
-                          {project.year}
-                        </span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            );
           })}
         </div>
+
+        {totalPages > 1 && (
+          <div className="flex items-center gap-2 shrink-0">
+          <button type="button" onClick={() => setCurrentPage((page) => Math.max(0, page - 1))} disabled={currentPage === 0} className="w-9 h-9 rounded-full border border-outline-variant/30 text-on-surface hover:border-primary hover:text-primary hover:bg-surface-container disabled:opacity-30 transition-all cursor-pointer flex items-center justify-center" aria-label="Previous page">
+            <span className="material-symbols-outlined text-lg">chevron_left</span>
+          </button>
+          <span className="font-mono text-xs font-semibold text-on-surface-variant">{currentPage + 1} / {totalPages}</span>
+          <button type="button" onClick={() => setCurrentPage((page) => Math.min(totalPages - 1, page + 1))} disabled={currentPage === totalPages - 1} className="w-9 h-9 rounded-full border border-outline-variant/30 text-on-surface hover:border-primary hover:text-primary hover:bg-surface-container disabled:opacity-30 transition-all cursor-pointer flex items-center justify-center" aria-label="Next page">
+            <span className="material-symbols-outlined text-lg">chevron_right</span>
+          </button>
+          </div>
+        )}
       </div>
 
-      {/* Pagination Controls & Slide Navigation */}
-      {totalPages > 1 && (
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-8 pt-6 border-t border-outline-variant/20">
-          {/* Showing Count */}
-          <div className="text-xs font-medium text-on-surface-variant order-2 sm:order-1">
-            Showing{' '}
-            <span className="font-bold text-on-surface">
-              {currentPage * itemsPerPage + 1}
-            </span>{' '}
-            -{' '}
-            <span className="font-bold text-on-surface">
-              {Math.min((currentPage + 1) * itemsPerPage, filteredProjects.length)}
-            </span>{' '}
-            of <span className="font-bold text-on-surface">{filteredProjects.length}</span> projects
-          </div>
-
-          {/* Controls: Prev, Dots/Numbers, Next */}
-          <div className="flex items-center gap-1.5 sm:gap-2 order-1 sm:order-2 flex-wrap justify-center">
-            {/* Prev Button */}
-            <button
-              onClick={() => setCurrentPage((p) => Math.max(0, p - 1))}
-              disabled={currentPage === 0}
-              className="px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg border border-outline-variant/30 text-on-surface hover:border-primary hover:text-primary hover:bg-surface-container disabled:opacity-30 disabled:pointer-events-none transition-all cursor-pointer flex items-center gap-1 text-xs font-semibold"
-              aria-label="Previous Page"
+      {/* Project cards */}
+      <div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          {pageProjects.map((project, index) => (
+            <div
+              key={index}
+              className="p-4 sm:p-5 md:p-6 bg-surface-container-lowest dark:bg-surface-container rounded-xl border border-outline-variant/30 hover:border-primary/60 dark:hover:border-primary/60 transition-all duration-300 flex flex-col justify-between hover:shadow-md hover:-translate-y-1 group h-full"
             >
-              <span className="material-symbols-outlined text-base">chevron_left</span>
-              <span className="hidden xs:inline">Prev</span>
-            </button>
-
-            {/* Page Buttons / Dots */}
-            <div className="flex items-center gap-1 sm:gap-1.5">
-              {Array.from({ length: totalPages }).map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setCurrentPage(idx)}
-                  className={`w-8 h-8 sm:w-9 sm:h-9 rounded-lg font-label-md text-xs font-bold transition-all cursor-pointer flex items-center justify-center ${currentPage === idx
-                    ? 'bg-primary text-on-primary shadow-md scale-105'
-                    : 'bg-surface-container-lowest dark:bg-surface-container border border-outline-variant/30 text-on-surface-variant hover:border-primary hover:text-primary'
-                    }`}
-                  aria-label={`Go to page ${idx + 1}`}
-                >
-                  {idx + 1}
+              <div>
+                <div className="flex justify-end mb-4">
+                  <span className="inline-flex items-center gap-1.5 rounded-md bg-primary/5 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-primary dark:bg-primary/10">
+                    <span className="material-symbols-outlined text-xs" aria-hidden="true">{project.category === 'machine-learning' ? 'psychology' : 'code'}</span>
+                    {project.category === 'machine-learning' ? 'Machine Learning' : 'Developer'}
+                  </span>
+                </div>
+                <h3 className="font-headline-md text-base md:text-lg font-bold text-on-surface mb-1.5 group-hover:text-primary transition-colors leading-snug">
+                  {project.title}
+                </h3>
+                <p className="text-sm text-on-surface-variant leading-relaxed mb-3">{project.desc}</p>
+                <div className="flex flex-wrap gap-1.5 mb-3">
+                  {project.tech.slice(0, 3).map((tech, techIdx) => (
+                    <span key={techIdx} className="px-2 py-0.5 bg-surface dark:bg-surface-container-high border border-outline-variant/20 rounded text-[10px] text-on-surface-variant font-medium">
+                      {tech}
+                    </span>
+                  ))}
+                  {project.tech.length > 3 && <span className="text-[10px] text-on-surface-variant/50 self-center font-medium">+{project.tech.length - 3} more</span>}
+                </div>
+              </div>
+              <div className="pt-3 border-t border-outline-variant/15 flex items-center justify-between">
+                <button type="button" onClick={() => onSelectProject(project)} className="text-primary font-label-md text-xs font-bold hover:underline inline-flex items-center gap-1 cursor-pointer transition-colors">
+                  <span>View Details</span><span className="text-sm font-bold">↗</span>
                 </button>
-              ))}
+                <span className="text-xs font-mono font-semibold text-on-surface-variant/70">{project.year}</span>
+              </div>
             </div>
-
-            {/* Next Button */}
-            <button
-              onClick={() => setCurrentPage((p) => Math.min(totalPages - 1, p + 1))}
-              disabled={currentPage === totalPages - 1}
-              className="px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg border border-outline-variant/30 text-on-surface hover:border-primary hover:text-primary hover:bg-surface-container disabled:opacity-30 disabled:pointer-events-none transition-all cursor-pointer flex items-center gap-1 text-xs font-semibold"
-              aria-label="Next Page"
-            >
-              <span className="hidden xs:inline">Next</span>
-              <span className="material-symbols-outlined text-base">chevron_right</span>
-            </button>
-          </div>
+          ))}
         </div>
-      )}
+      </div>
+
     </section>
   );
 };

@@ -27,25 +27,11 @@ type FilterTab = 'all' | 'certification' | 'training';
 
 export const Certificates: React.FC<CertificatesProps> = ({ onSelectCertificate }) => {
   const [activeTab, setActiveTab] = useState<FilterTab>('all');
-  const [currentPage, setCurrentPage] = useState<number>(0);
-  const [itemsPerPage, setItemsPerPage] = useState<number>(6);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(6);
 
-  // Touch swipe state
-  const [touchStartX, setTouchStartX] = useState<number | null>(null);
-  const [touchEndX, setTouchEndX] = useState<number | null>(null);
-
-  // Responsive items per page (strictly max 2 rows on every viewport)
   useEffect(() => {
-    const updateItemsPerPage = () => {
-      if (window.innerWidth < 640) {
-        setItemsPerPage(2); // 1 col x 2 rows = 2 items
-      } else if (window.innerWidth < 1024) {
-        setItemsPerPage(4); // 2 cols x 2 rows = 4 items
-      } else {
-        setItemsPerPage(6); // 3 cols x 2 rows = 6 items
-      }
-    };
-
+    const updateItemsPerPage = () => setItemsPerPage(window.innerWidth < 640 ? 2 : window.innerWidth < 1024 ? 4 : 6);
     updateItemsPerPage();
     window.addEventListener('resize', updateItemsPerPage);
     return () => window.removeEventListener('resize', updateItemsPerPage);
@@ -187,6 +173,24 @@ export const Certificates: React.FC<CertificatesProps> = ({ onSelectCertificate 
         'Data Aggregation',
       ],
     },
+    {
+      id: 'train-excel-2',
+      title: 'Microsoft Excel Intermediate',
+      issuer: 'MySkill',
+      date: 'Nov 2026',
+      icon: 'table_chart',
+      type: 'training',
+      description:
+        'Studied intermediate data processing and analysis techniques using Microsoft Excel, including lookup and reference functions (Lookup, INDEX MATCH), mathematical and logical formulas, text and date processing, and error handling. The training also covered data management using Tables and Pivot Tables, visualization through Charts, Dynamic Array Formulas, data formatting, and print and page setup for creating structured and informative reports.',
+      skills: [
+        'Microsoft Excel',
+        'Lookup & INDEX MATCH',
+        'Pivot Table',
+        'Dynamic Array Formulas',
+        'Data Visualization & Charts',
+        'Error Handling',
+      ],
+    },
   ];
 
   const tabs: { key: FilterTab; label: string; icon: string }[] = [
@@ -196,39 +200,14 @@ export const Certificates: React.FC<CertificatesProps> = ({ onSelectCertificate 
   ];
 
   const filteredItems = activeTab === 'all' ? items : items.filter((item) => item.type === activeTab);
-
-  const totalPages = Math.ceil(filteredItems.length / itemsPerPage) || 1;
-
-  // Handle tab switch
-  const handleTabChange = (tab: FilterTab) => {
-    setActiveTab(tab);
-    setCurrentPage(0);
-  };
-
-  // Touch swipe handlers
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStartX(e.targetTouches[0].clientX);
-    setTouchEndX(null);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEndX(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchEnd = () => {
-    if (touchStartX === null || touchEndX === null) return;
-    const distance = touchStartX - touchEndX;
-    const minSwipeDistance = 50;
-
-    if (distance > minSwipeDistance && currentPage < totalPages - 1) {
-      setCurrentPage((prev) => prev + 1);
-    } else if (distance < -minSwipeDistance && currentPage > 0) {
-      setCurrentPage((prev) => prev - 1);
-    }
-
-    setTouchStartX(null);
-    setTouchEndX(null);
-  };
+  const orderedItems = [...filteredItems];
+  const qaIndex = orderedItems.findIndex((item) => item.id === 'train-qa-1');
+  const excelIndex = orderedItems.findIndex((item) => item.id === 'train-excel-2');
+  if (qaIndex !== -1 && excelIndex !== -1) {
+    [orderedItems[qaIndex], orderedItems[excelIndex]] = [orderedItems[excelIndex], orderedItems[qaIndex]];
+  }
+  const totalPages = Math.ceil(orderedItems.length / itemsPerPage) || 1;
+  const pageItems = orderedItems.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
 
   return (
     <section
@@ -243,37 +222,12 @@ export const Certificates: React.FC<CertificatesProps> = ({ onSelectCertificate 
           </h2>
         </div>
 
-        {/* Quick Slider Controls in Header */}
-        {totalPages > 1 && (
-          <div className="hidden sm:flex items-center gap-2 shrink-0">
-            <button
-              onClick={() => setCurrentPage((p) => Math.max(0, p - 1))}
-              disabled={currentPage === 0}
-              className="w-10 h-10 rounded-full border border-outline-variant/30 text-on-surface hover:border-primary hover:text-primary hover:bg-surface-container disabled:opacity-30 disabled:pointer-events-none transition-all cursor-pointer flex items-center justify-center"
-              aria-label="Previous Slide"
-              title="Previous Slide"
-            >
-              <span className="material-symbols-outlined text-xl">chevron_left</span>
-            </button>
-            <span className="font-mono text-xs font-semibold text-on-surface-variant px-1">
-              {currentPage + 1} / {totalPages}
-            </span>
-            <button
-              onClick={() => setCurrentPage((p) => Math.min(totalPages - 1, p + 1))}
-              disabled={currentPage === totalPages - 1}
-              className="w-10 h-10 rounded-full border border-outline-variant/30 text-on-surface hover:border-primary hover:text-primary hover:bg-surface-container disabled:opacity-30 disabled:pointer-events-none transition-all cursor-pointer flex items-center justify-center"
-              aria-label="Next Slide"
-              title="Next Slide"
-            >
-              <span className="material-symbols-outlined text-xl">chevron_right</span>
-            </button>
-          </div>
-        )}
       </div>
 
-      {/* Filter Tabs */}
-      <div className="flex flex-wrap gap-2 mb-6 sm:mb-8">
-        {tabs.map((tab) => {
+      {/* Certificate toolbar */}
+      <div className="w-full flex flex-wrap items-center justify-between gap-4 mb-6 sm:mb-8">
+        <div className="flex flex-wrap items-center gap-2">
+          {tabs.map((tab) => {
           const count =
             tab.key === 'all' ? items.length : items.filter((i) => i.type === tab.key).length;
           const isActive = activeTab === tab.key;
@@ -281,7 +235,7 @@ export const Certificates: React.FC<CertificatesProps> = ({ onSelectCertificate 
           return (
             <button
               key={tab.key}
-              onClick={() => handleTabChange(tab.key)}
+              onClick={() => { setActiveTab(tab.key); setCurrentPage(0); }}
               className={`inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-label-md text-xs sm:text-label-md font-semibold transition-all duration-300 cursor-pointer border ${isActive
                   ? 'bg-primary text-on-primary border-primary shadow-md'
                   : 'bg-surface-container-lowest dark:bg-surface-container border-outline-variant/30 text-on-surface-variant hover:border-primary hover:text-primary'
@@ -299,48 +253,40 @@ export const Certificates: React.FC<CertificatesProps> = ({ onSelectCertificate 
               </span>
             </button>
           );
-        })}
+          })}
+        </div>
+
+        {totalPages > 1 && (
+          <div className="flex items-center gap-2 shrink-0">
+            <button type="button" onClick={() => setCurrentPage((page) => Math.max(0, page - 1))} disabled={currentPage === 0} className="w-9 h-9 rounded-full border border-outline-variant/30 text-on-surface hover:border-primary hover:text-primary hover:bg-surface-container disabled:opacity-30 transition-all cursor-pointer flex items-center justify-center" aria-label="Previous page">
+              <span className="material-symbols-outlined text-lg">chevron_left</span>
+            </button>
+            <span className="font-mono text-xs font-semibold text-on-surface-variant">{currentPage + 1} / {totalPages}</span>
+            <button type="button" onClick={() => setCurrentPage((page) => Math.min(totalPages - 1, page + 1))} disabled={currentPage === totalPages - 1} className="w-9 h-9 rounded-full border border-outline-variant/30 text-on-surface hover:border-primary hover:text-primary hover:bg-surface-container disabled:opacity-30 transition-all cursor-pointer flex items-center justify-center" aria-label="Next page">
+              <span className="material-symbols-outlined text-lg">chevron_right</span>
+            </button>
+          </div>
+        )}
       </div>
 
-      {/* Slidable Carousel Container (Max 2 rows per page) */}
-      <div
-        className="relative overflow-hidden cursor-grab active:cursor-grabbing select-none"
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-      >
-        <div
-          className="flex transition-transform duration-500 ease-out"
-          style={{ transform: `translateX(-${currentPage * 100}%)` }}
-        >
-          {Array.from({ length: totalPages }).map((_, pageIdx) => {
-            const pageItems = filteredItems.slice(
-              pageIdx * itemsPerPage,
-              (pageIdx + 1) * itemsPerPage
-            );
-
-            return (
-              <div key={pageIdx} className="w-full shrink-0">
-                {/* 2-Row Grid Layout */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 auto-rows-fr">
-                  {pageItems.map((cert) => (
+      {/* Certificate cards */}
+      <div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 auto-rows-fr">
+          {pageItems.map((cert) => (
                     <div
                       key={cert.id}
                       className="p-4 sm:p-5 md:p-6 bg-surface-container-lowest dark:bg-surface-container rounded-xl border border-outline-variant/30 hover:border-primary/60 dark:hover:border-primary/60 transition-all duration-300 flex flex-col justify-between hover:shadow-md hover:-translate-y-1 group h-full"
                     >
                       <div>
-                        {/* Type Badge + Icon Row */}
-                        <div className="flex items-center justify-between mb-4">
-                          <div className="w-11 h-11 rounded-lg bg-surface-container dark:bg-surface-container-high text-primary flex items-center justify-center group-hover:scale-105 transition-transform">
-                            <span className="material-symbols-outlined text-2xl">{cert.icon}</span>
-                          </div>
+                        {/* Type Badge */}
+                        <div className="flex justify-end mb-4">
                           <span
-                            className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider ${cert.type === 'certification'
-                                ? 'bg-primary/10 text-primary border border-primary/20'
-                                : 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20'
+                            className={`inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] ${cert.type === 'certification'
+                                ? 'bg-primary/5 text-primary dark:bg-primary/10'
+                                : 'bg-primary/5 text-primary dark:bg-primary/10'
                               }`}
                           >
-                            <span className="material-symbols-outlined text-sm">
+                            <span className="material-symbols-outlined text-xs" aria-hidden="true">
                               {cert.type === 'certification' ? 'workspace_premium' : 'school'}
                             </span>
                             {cert.type === 'certification' ? 'Certification' : 'Training'}
@@ -393,73 +339,10 @@ export const Certificates: React.FC<CertificatesProps> = ({ onSelectCertificate 
                         </span>
                       </div>
                     </div>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
+          ))}
         </div>
       </div>
 
-      {/* Pagination Controls & Slide Navigation */}
-      {totalPages > 1 && (
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-8 pt-6 border-t border-outline-variant/20">
-          {/* Showing Count */}
-          <div className="text-xs font-medium text-on-surface-variant order-2 sm:order-1">
-            Showing{' '}
-            <span className="font-bold text-on-surface">
-              {currentPage * itemsPerPage + 1}
-            </span>{' '}
-            -{' '}
-            <span className="font-bold text-on-surface">
-              {Math.min((currentPage + 1) * itemsPerPage, filteredItems.length)}
-            </span>{' '}
-            of <span className="font-bold text-on-surface">{filteredItems.length}</span> items
-          </div>
-
-          {/* Controls: Prev, Dots/Numbers, Next */}
-          <div className="flex items-center gap-1.5 sm:gap-2 order-1 sm:order-2 flex-wrap justify-center">
-            {/* Prev Button */}
-            <button
-              onClick={() => setCurrentPage((p) => Math.max(0, p - 1))}
-              disabled={currentPage === 0}
-              className="px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg border border-outline-variant/30 text-on-surface hover:border-primary hover:text-primary hover:bg-surface-container disabled:opacity-30 disabled:pointer-events-none transition-all cursor-pointer flex items-center gap-1 text-xs font-semibold"
-              aria-label="Previous Page"
-            >
-              <span className="material-symbols-outlined text-base">chevron_left</span>
-              <span className="hidden xs:inline">Prev</span>
-            </button>
-
-            {/* Page Buttons / Dots */}
-            <div className="flex items-center gap-1 sm:gap-1.5">
-              {Array.from({ length: totalPages }).map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setCurrentPage(idx)}
-                  className={`w-8 h-8 sm:w-9 sm:h-9 rounded-lg font-label-md text-xs font-bold transition-all cursor-pointer flex items-center justify-center ${currentPage === idx
-                      ? 'bg-primary text-on-primary shadow-md scale-105'
-                      : 'bg-surface-container-lowest dark:bg-surface-container border border-outline-variant/30 text-on-surface-variant hover:border-primary hover:text-primary'
-                    }`}
-                  aria-label={`Go to page ${idx + 1}`}
-                >
-                  {idx + 1}
-                </button>
-              ))}
-            </div>
-
-            {/* Next Button */}
-            <button
-              onClick={() => setCurrentPage((p) => Math.min(totalPages - 1, p + 1))}
-              disabled={currentPage === totalPages - 1}
-              className="px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg border border-outline-variant/30 text-on-surface hover:border-primary hover:text-primary hover:bg-surface-container disabled:opacity-30 disabled:pointer-events-none transition-all cursor-pointer flex items-center gap-1 text-xs font-semibold"
-              aria-label="Next Page"
-            >
-              <span className="hidden xs:inline">Next</span>
-              <span className="material-symbols-outlined text-base">chevron_right</span>
-            </button>
-          </div>
-        </div>
-      )}
     </section>
   );
 };

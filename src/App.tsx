@@ -510,7 +510,7 @@ function App() {
                 <span className="font-label-sm text-label-sm text-on-surface-variant shrink-0 ml-4">Okt — Nov 2026</span>
               </div>
               <p className="font-body-md text-xs text-on-surface-variant">
-                Quality Assurance, SQL for Data Analysis, Data Science, Data Analysis, Basic Data Analytics, Microsoft Excel
+                Quality Assurance, SQL for Data Analysis, Data Science, Data Analysis, Basic Data Analytics, Microsoft Excel, Microsoft Excel Intermediate
               </p>
             </div>
           </div>
